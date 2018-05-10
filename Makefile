@@ -9,10 +9,10 @@ endif
 ifdef LATEST_TAG
 	REVISION_RANGE := "$(LATEST_TAG)..HEAD"
 endif
-CHANGELOG := $(shell git log $(REVISION_RANGE) --pretty=format:'%h - %s\\n' --no-merges)
-
+CHANGELOG := $(shell git log $(REVISION_RANGE) --pretty=format:'%h - %s <br>' --no-merges)
 release: 
-	@go get -u github.com/c4milo/github-release
+	@#go get -u github.com/c4milo/github-release
+	go get -u github.com/itchio/gothub
 	#@go get -u github.com/deild/sembump
 	$(eval NEW_VERSION = $(shell sembump -kind $(BUMP) $(VERSION)))
 	@echo "Bumping version from $(VERSION) to $(NEW_VERSION)"
@@ -22,6 +22,12 @@ release:
 	git add VERSION README.md
 	git commit -vsam "chore : bump version to $(NEW_VERSION)"
 	git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`
-	@echo "Release new version $(NEW_VERSION)"
-	github-release deild/$(NAME) v$(NEW_VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**\\n$(CHANGELOG)" ''
+	@echo "Release version $(NEW_VERSION)"
+	@#github-release deild/$(NAME) v$(NEW_VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br>$(CHANGELOG)" ''
+	gothub release \
+    --user deild \
+    --repo $(NAME) \
+    --tag v$(NEW_VERSION) \
+    --name "v$(NEW_VERSION)" \
+    --description "**Changelog**<br>$(CHANGELOG)"
 	git pull --rebase --prune
