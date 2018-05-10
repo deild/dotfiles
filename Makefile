@@ -2,7 +2,6 @@ NAME := dotfiles
 VERSION := $(shell cat VERSION)
 # Bump the version in the version file. Set BUMP to [ patch | minor | major ]
 BUMP := minor
-PRE := 
 LATEST_TAG_HASH := $(shell git rev-list --tags --max-count=1)
 ifdef LATEST_TAG_HASH
 	LATEST_TAG := $(shell git describe --tags $(LATEST_TAG_HASH))
@@ -21,8 +20,8 @@ release:
 	#@echo "Updating links to download binaries in README.md"
 	#sed -i s/$(VERSION)/$(NEW_VERSION)/g README.md
 	git add VERSION README.md
-	#git commit -vsam "Bump version to $(NEW_VERSION)"
+	git commit -vsam "Bump version to $(NEW_VERSION)"
 	@echo "Release new version $(NEW_VERSION)"
 
-	#github-release deild/$(NAME) $(VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br/>$(CHANGELOG)" ''
+	github-release deild/$(NAME) $(VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br/>$(CHANGELOG)" ''
 	git pull
