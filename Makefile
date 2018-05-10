@@ -9,7 +9,7 @@ endif
 ifdef LATEST_TAG
 	REVISION_RANGE := "$(LATEST_TAG)..HEAD"
 endif
-CHANGELOG := $(shell git log $(REVISION_RANGE) --pretty=format:'%h - %s' --no-merges)
+CHANGELOG := $(shell git log $(REVISION_RANGE) --pretty=format:'%h - %s\\n' --no-merges)
 
 release: 
 	@go get -u github.com/c4milo/github-release
@@ -20,8 +20,8 @@ release:
 	#@echo "Updating links to download binaries in README.md"
 	#sed -i s/$(VERSION)/$(NEW_VERSION)/g README.md
 	git add VERSION README.md
-	git commit -vsam "chore : set version to $(NEW_VERSION)"
+	git commit -vsam "chore : bump version to $(NEW_VERSION)"
 	git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`
 	@echo "Release new version $(NEW_VERSION)"
-	github-release deild/$(NAME) $(NEW_VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br/>$(CHANGELOG)" ''
+	github-release deild/$(NAME) v$(NEW_VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**\\n$(CHANGELOG)" ''
 	git pull --rebase --prune
