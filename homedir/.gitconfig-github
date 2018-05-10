@@ -1,0 +1,6 @@
+[github]
+	user = GITHUB_USER
+	token = GITHUB_TOKEN
+[user]
+	email = GITHUB_NOREPLY_EMAIL
+	name = GITHUB_NAME

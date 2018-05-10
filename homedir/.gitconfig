@@ -1,0 +1,55 @@
+#[user]
+#	email = EMAIL
+#	name = NAME
+[color]
+	ui = true
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[alias]
+	amend = commit --amend
+	st = status -s
+	who = shortlog -sne
+	lc = !git log --pretty=oneline --abbrev-commit --graph ORIG_HEAD.. --stat --no-merges
+	undo = git reset --soft HEAD^
+	up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+	pushit = "!f() { git rev-parse --abbrev-ref HEAD ; }; git push --set-upstream origin `f`"
+	lo = log --pretty=oneline --abbrev-commit --graph --decorate
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue[%cn]'
+	ls = log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate
+	lf = log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate --numstat
+	lcl = log --pretty=format:'%h - %s' --no-merges
+	filelog = log -u
+	grep = grep -Ii
+	lasttag = describe --tags --abbrev=0
+	sync = !git fetch origin ${1-master} && git rebase origin/${1-master}
+[core]
+	autocrlf = input
+	editor = atom --wait
+	excludesfile = ~/.gitignore_global
+	fscache = true
+	safecrlf = true
+[push]
+	default = simple
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[branch]
+	autosetuprebase = always
+[rerere]
+	enabled = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+[credential]
+	helper = osxkeychain
+[includeIf "gitdir:~/github.com/**"]
+  path = .gitconfig-github
+[includeIf "gitdir:~/Go/src/github.com/GITHUB_USER/**"]
+  path = .gitconfig-github
+[includeIf "gitdir:~/bitbucket.org/**"]
+  path = .gitconfig-bitbucket
+[fetch]
+	prune = true

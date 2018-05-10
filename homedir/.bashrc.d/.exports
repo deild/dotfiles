@@ -1,0 +1,40 @@
+#!/bin/bash
+
+export HOMEBREW_NO_EMOJI=1
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+# Golang
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=~/Go
+export GO15VENDOREXPERIMENT=1
+
+if [ -z "$(brew ls --versions shunit2)" ]; then
+  SHUNIT2_SCRIPTS="$(brew --prefix shunit2)"
+  export SHUNIT2_SCRIPTS
+fi
+
+# This is the main command to invoke Ledger.
+# --strict          : Warn if account, tag or commodity is unknown.
+# --pedantic        : Abort if account, tag or commodity is unknown.
+# --check-payees    : Warn/abort if payee is unknown.
+# --explicit        : Warn/abort also for cleared transactions
+# --wide            : Cause the default register report to assume a wide screen.
+# --flat            : Do not shouw accounts in a hierarchical tree
+export LEDGERARGS='--pedantic --check-payees --explicit'
+
+# Source - http://askubuntu.com/questions/35689/highlight-manpages-syntax
+# Less Colors for Man Pages
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
+
+if [ -z "$(brew ls --versions maven)" ]; then
+  M2_HOME="$(brew --prefix maven)"
+  export M2_HOME
+  export MAVEN_OPTS='-Xms256m -Xmx1024m'
+fi

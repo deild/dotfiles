@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+
+case :$PATH: 
+  in *:/usr/local/sbin:*) ;; 
+     *) export PATH="/usr/local/sbin:$PATH" ;;
+esac
+case :$PATH: 
+  in *:/usr/local/bin:*) ;; 
+     *) export PATH="/usr/local/bin:$PATH" ;;
+esac
+
+if /usr/libexec/java_home -v 1.8 &> /dev/null ; then
+  JAVA_HOME=$(/usr/libexec/java_home -v 1.8);
+  export JAVA_HOME;
+fi
+if /usr/libexec/java_home -v 1.9 &> /dev/null ; then
+  JAVA_HOME=$(/usr/libexec/java_home -v 1.9);
+  export JAVA_HOME;
+fi
+#if /usr/libexec/java_home -v 1.10 &> /dev/null ; then
+#  JAVA_HOME=$(/usr/libexec/java_home -v 1.10);
+#  export JAVA_HOME;
+#fi
+
+if [ -z "$JAVA_HOME" ]; then
+  case :$PATH: 
+    in *:$JAVA_HOME/bin:*) ;; 
+      *) export PATH="$JAVA_HOME/bin:$PATH" ;;
+  esac;  
+fi
+
+# Golang
+case :$PATH: 
+  in *:/usr/local/opt/go/bin:*) ;; 
+     *) export PATH="/usr/local/opt/go/bin:$PATH" ;;
+esac
+
+case :$PATH: 
+  in *:$HOME/Go/bin:*) ;; 
+     *) export PATH="$HOME/Go/bin:$PATH" ;;
+esac
+
+case :$PATH: 
+  in *:/usr/local/opt/curl/bin:*) ;; 
+     *) export PATH="/usr/local/opt/curl/bin:$PATH" ;;
+esac
+
+case :$PATH: 
+  in *:/Library/TeX/texbin:*) ;; 
+     *) export PATH="$PATH:/Library/TeX/texbin" ;;
+esac
+
+case :$PATH: 
+  in *:/usr/local/opt/libressl/bin:*) ;; 
+     *) export PATH="/usr/local/opt/libressl/bin:$PATH" ;;
+esac
+
+case :$PATH:
+  in *:/Applications/calibre.app/Contents/console.app/Contents/MacOS:*) ;; 
+     *) export PATH="$PATH:/Applications/calibre.app/Contents/console.app/Contents/MacOS" ;;
+esac
+
+case :$PATH: 
+  in *:/usr/local/bin/mvn:*) ;; 
+     *) export PATH="/usr/local/bin/mvn:$PATH" ;;
+esac
+
+case ":$PATH:" in
+  *:/usr/local/opt/coreutils/libexec/gnubin:*) ;;
+  *) export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH";;  
+esac
+case ":$MANPATH:" in
+  *:/usr/local/opt/coreutils/libexec/gnuman:*) ;;
+  *) export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH ";;  
+esac
+
+case ":$PATH:" in
+  *:/usr/local/opt/findutils/libexec/gnubin:*) ;;
+  *) export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH";;  
+esac
+case ":$MANPATH:" in
+  *:/usr/local/opt/findutils/libexec/gnuman:*) ;;
+  *) export MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH ";;  
+esac
