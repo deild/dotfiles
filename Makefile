@@ -20,7 +20,7 @@ release:
 	#@echo "Updating links to download binaries in README.md"
 	#sed -i s/$(VERSION)/$(NEW_VERSION)/g README.md
 	git add VERSION README.md
-	git commit -vsam "chore : bump version to $(NEW_VERSION)"
+	git commit -vsam "bump: version to $(NEW_VERSION)"
 	git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`
 	@echo "Release version $(NEW_VERSION)"
 	@#github-release deild/$(NAME) v$(NEW_VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br>$(CHANGELOG)" ''
