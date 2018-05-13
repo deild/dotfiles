@@ -5,7 +5,7 @@
 # `less` with options to preserve color and line numbers, unless the output is
 # small enough for one screen.
 tre() {
-	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+	tree -aC -I '.git|node_modules|bower_components|.idea' --dirsfirst "$@" | less -FRNX;
 }
 
 test_color() {
@@ -103,9 +103,7 @@ dirtodmg() {
 
 brewup() {
   brew update
-  outdated="$(brew outdated)"
-  [ -z "$outdated" ] && brew upgrade
-  unset outdated
+  [ -n "$(brew outdated)" ] && brew upgrade
   brew cleanup
   brew prune
 }
