@@ -9,7 +9,7 @@
 	st = status -s
 	who = shortlog -sne
 	lc = !git log --pretty=oneline --abbrev-commit --graph ORIG_HEAD.. --stat --no-merges
-	undo = git reset --soft HEAD^
+	undo = reset --soft HEAD^
 	up = !git pull --rebase --prune $@ && git submodule update --init --recursive
 	pushit = "!f() { git rev-parse --abbrev-ref HEAD ; }; git push --set-upstream origin `f`"
 	lo = log --pretty=oneline --abbrev-commit --graph --decorate
