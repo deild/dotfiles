@@ -2,7 +2,7 @@
 
 ## ¯\\(ツ)/¯ Attention
 
-Avertissement : Si vous voulez essayer ces dotfiles, vous devez d'abord fork ce référentiel, revoir le code, et supprimer les choses que vous ne voulez pas ou dont vous n'avez pas besoin. N'utilisez pas aveuglément mes réglages à moins de savoir ce que cela implique. Utilisez les à vos risques et périls !
+Avertissement : Si vous voulez essayer ces dotfiles, vous devez d'abord dupliquer ce référentiel, revoir le code, et supprimer les choses que vous ne voulez pas ou dont vous n'avez pas besoin. N'utilisez pas aveuglément mes réglages à moins de savoir ce que cela implique. Utilisez les à vos risques et périls !
 
 ### \\[._.]/ Installer les formules Homebrew
 
@@ -46,7 +46,7 @@ export PATH="/usr/local/bin:$PATH"
 
 ### \\[._.]/ Ajouter des commandes personnalisées sans créer un nouveau fork
 
-Si `~/bashrc.d/.extra` existe, il sera source avec les autres fichiers. Vous pouvez l'utiliser pour ajouter quelques commandes personnalisées sans avoir besoin de fork tout le référentiel, ou pour ajouter des commandes que vous ne voulez pas livrer dans un référentiel public.
+Si `~/bashrc.d/.extra` existe, il sera source avec les autres fichiers. Vous pouvez l'utiliser pour ajouter quelques commandes personnalisées sans avoir besoin de dupliquer tout le référentiel, ou pour ajouter des commandes que vous ne voulez pas livrer dans un référentiel public.
 
 Mon `~/bashrc.d/.extra` ressemble à ceci :
 
@@ -61,7 +61,7 @@ GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 git config --global user.email "$GIT_AUTHOR_EMAIL"
 ```
 
-Vous pouvez également utiliser `~/bashrc.d/.extra` pour remplacer les paramètres, fonctions et alias de mon référentiel dotfiles. Il vaut probablement mieux [fork ce référentiel](https://github.com/deild/dotfiles/fork) à la place.
+Vous pouvez également utiliser `~/bashrc.d/.extra` pour remplacer les paramètres, fonctions et alias de mon référentiel dotfiles. Il vaut probablement mieux [dubliquer ce référentiel](https://github.com/deild/dotfiles/fork) à la place.
 
 ### \\[._.]/ Paramètres par défaut raisonnables de macOS
 
