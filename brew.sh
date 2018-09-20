@@ -21,8 +21,8 @@ fi
 printf "\\e[0;32m%s\\e[0m\\n" "[✔] Install/Update Homebrew"
 
 # Upgrade any already-installed formulae.
-outdated="$(brew outdated)"
-[ -z "$outdated" ] &&brew upgrade
+[ -z "$(brew outdated)" ] && brew upgrade
+[ -n "$(brew cask outdated)" ] && brew cask upgrade
 
 # Install from local Brewfile
 printf "\\e[0;33m%s\\e[0m" "[?] Would you like to install all apps from Brewfile? (y/n) "
@@ -45,4 +45,4 @@ fi;
 
 # Remove outdated versions from the cellar.
 brew cleanup
-brew cask cleanup
+brew prune

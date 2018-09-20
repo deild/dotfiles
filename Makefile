@@ -25,7 +25,6 @@ debug: ## Displays debug informations
 
 setup: ## Install dependencies tools
 	go get -u github.com/itchio/gothub
-	@#go get -u github.com/deild/sembump
 
 release: ## Bump the version, Tag and Publish to GitHub
 	$(eval CHANGELOG = $(shell git log $(REVISION_RANGE) --pretty=format:'%h - %s <br>' --no-merges))

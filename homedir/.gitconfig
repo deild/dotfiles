@@ -6,25 +6,26 @@
   remote = green
 [alias]
 	amend = commit --amend
-	st = status -s
-	who = shortlog -sne
-	lc = !git log --pretty=oneline --abbrev-commit --graph ORIG_HEAD.. --stat --no-merges
-	undo = reset --soft HEAD^
-	up = !git pull --rebase --prune $@ && git submodule update --init --recursive
-	pushit = "!f() { git rev-parse --abbrev-ref HEAD ; }; git push --set-upstream origin `f`"
-	lo = log --pretty=oneline --abbrev-commit --graph --decorate
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue[%cn]'
-	ls = log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate
-	lf = log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate --numstat
-	lcl = log --pretty=format:'%h - %s' --no-merges
 	filelog = log -u
 	grep = grep -Ii
 	lasttag = describe --tags --abbrev=0
+	lc = !git log --pretty=oneline --abbrev-commit --graph ORIG_HEAD.. --stat --no-merges
+	lcl = log --pretty=format:'%h - %s' --no-merges
+	lf = log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate --numstat
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue[%cn]'
+	lo = log --pretty=oneline --abbrev-commit --graph --decorate
+	ls = log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate
+	oops = commit --amend --no-edit
+	pushit = "!f() { git rev-parse --abbrev-ref HEAD ; }; git push --set-upstream origin `f`"
+	st = status -s
 	sync = !git fetch origin ${1-master} && git rebase origin/${1-master}
+	undo = reset --soft HEAD^
+	up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+	who = shortlog -sne
 [core]
 	autocrlf = input
 	editor = vim
-	excludesfile = ~/.config.git/.gitignore_global
+	excludesfile = ~/.config/git/.gitignore_global
 	fscache = true
 	safecrlf = true
 [push]
@@ -36,6 +37,7 @@
 	autosetuprebase = always
 [rerere]
 	enabled = true
+	autoupdate = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -53,3 +55,9 @@
 [commit]
 	template = ~/.config/git/.gitmessage
 	cleanup = strip
+[tag]
+	# Sort tags as version numbers whenever applicable, so 1.10.2 is AFTER 1.2.0.
+	sort = version:refname
+[pager]
+  diff = diff-so-fancy | less --tabs=1,5 -RFX
+  show = diff-so-fancy | less --tabs=1,5 -RFX
