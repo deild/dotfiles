@@ -51,7 +51,7 @@ else
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     doBrew;
   fi;
-  printf "\\e[0;33m%s\\e[0m" "[?] This may overwrite existing files in your home directory. Are you sure? (y/n) "
+  printf "\\e[0;33m%s\\e[0m" "[?] Copy dotfiles, This may overwrite existing files in your home directory. Are you sure? (y/n) "
   read -r -n 1;
   echo "";
   if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -59,3 +59,5 @@ else
   fi;
 fi;
 unset doIt;
+unset doBrew;
+

@@ -17,8 +17,39 @@ write com.twitter.twitter-mac ESCClosesComposeWindow -bool true
 # FileVault 2                                                                 #
 ###############################################################################
 
-# Prevent attacker with physical access from taking your encryption key in standby mode
+# Prevent attacker with physical access from taking your encryption key in standby mode, you may wish to enforce hibernation and evict FileVault keys from memory instead of traditional sleep to memory
 sudo pmset -a destroyfvkeyonstandby 1
+sudo pmset -a hibernatemode 25
+# If you choose to evict FileVault keys in standby mode, you should also modify your standby and power nap settings. Otherwise, your machine may wake while in standby mode and then power off due to the absence of the FileVault key
+sudo pmset -a powernap 0
+sudo pmset -a standby 0
+sudo pmset -a standbydelay 0
+sudo pmset -a autopoweroff 0
+
+###############################################################################
+# Firewall                                                                    #
+###############################################################################
+
+# Enable the firewall with logging:
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setloggingmode on
+
+# You may also wish to enable stealth mode
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
+
+# To prevent built-in software as well as code-signed, downloaded software from being whitelisted automatically
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned off
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp off
+
+# After interacting with socketfilterfw, you may want to restart (or terminate) the process
+sudo pkill -HUP socketfilterfw
+
+###############################################################################
+# Captive portal                                                              #
+###############################################################################
+
+# When macOS connects to new networks, it probes the network and launches a Captive Portal assistant utility if connectivity can't be determined. It's best to disable this feature and log in to captive portals using your regular Web browser.
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control Active -bool false
 
 ###############################################################################
 # Kill affected applications                                                  #

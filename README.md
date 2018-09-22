@@ -4,17 +4,11 @@
 
 Avertissement : Si vous voulez essayer ces _dotfiles_, vous devez d'abord dupliquer ce référentiel, revoir le code, et supprimer les choses que vous ne voulez pas ou dont vous n'avez pas besoin. N'utilisez pas aveuglément mes réglages à moins de savoir ce que cela implique. Utilisez les à vos risques et périls !
 
-### \\[._.]/ Installer les formules Homebrew
-
-Lors de la configuration d'un nouveau Mac, vous voudrez peut-être installer certaines formules [Homebrew](https://brew.sh/) courantes (après l'installation de Homebrew, bien sûr) :
-
-```bash
-./brew.sh
-```
-
-Certaines des fonctionnalités de ces _dotfiles_ dépendent des formules installées par `brew.sh`. Si vous n'avez pas l'intention d'exécuter `brew.sh`, vous devriez parcourir attentivement le script et installer manuellement celles qui sont particulièrement importantes. Un bon exemple est la complétion Bash/Git : les dotfiles utilisent une version spéciale de Homebrew.
-
 ### \\[._.]/ Utilisation de Git et du script bootstrap
+
+**Remarque** Si vous n'avez pas déjà installé Xcode ou Command Line Tools, utilisez `xcode-select --install` pour les télécharger et les installer depuis Apple.
+
+j'utiliser Homebrew pour faciliter l'installation des logiciels et mettre à jour les outils de l'espace utilisateur.
 
 Vous pouvez cloner le référentiel où vous voulez. Le script de bootstrap tirera la dernière version et copiera les fichiers dans votre dossier personnel.
 
@@ -33,6 +27,16 @@ Alternativement, pour mettre à jour tout en évitant l'invite de confirmation :
 ```bash
 set -- -f; . bootstrap.sh
 ```
+
+### \\[._.]/ Installer les formules Homebrew
+
+Lors de la configuration d'un nouveau Mac, vous voudrez peut-être installer certaines formules [Homebrew](https://brew.sh/) courantes (après l'installation de Homebrew, bien sûr) :
+
+```bash
+./brew.sh
+```
+
+Certaines des fonctionnalités de ces _dotfiles_ dépendent des formules installées par `brew.sh`. Si vous n'avez pas l'intention d'exécuter `brew.sh`, vous devriez parcourir attentivement le script et installer manuellement celles qui sont particulièrement importantes. Un bon exemple est la complétion Bash/Git : les dotfiles utilisent une version spéciale de Homebrew.
 
 ### \\[._.]/ Spécifiez le `$PATH`
 

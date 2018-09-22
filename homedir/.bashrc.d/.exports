@@ -2,7 +2,8 @@
 
 export HOMEBREW_NO_EMOJI=1
 export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export HOMEBREW_NO_INSECURE_REDIRECT=1
+export HOMEBREW_CASK_OPTS="--require-sha --appdir=/Applications"
 
 # Golang
 export GOROOT=/usr/local/opt/go/libexec
