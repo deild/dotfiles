@@ -24,9 +24,7 @@ doBrew() {
     brew update
   else
     printf "\\e[0;35m%s\\e[0m" "[-] Installing Brew"
-    ruby -e \
-    "$(curl -Ls 'https://github.com/Homebrew/install/raw/master/install')" \
-    < /dev/null > /dev/null 2>&1
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew analytics off
     brew update
   fi

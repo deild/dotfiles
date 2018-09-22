@@ -19,13 +19,13 @@ git clone https://github.com/deild/dotfiles.git && cd dotfiles && . bootstrap.sh
 Pour mettre à jour, `cd` dans votre dépôt local `dotfiles` et ensuite :
 
 ```bash
-. bootstrap.sh
+./bootstrap.sh
 ```
 
 Alternativement, pour mettre à jour tout en évitant l'invite de confirmation :
 
 ```bash
-set -- -f; . bootstrap.sh
+set -- -f; ./bootstrap.sh
 ```
 
 ### \\[._.]/ Installer les formules Homebrew
