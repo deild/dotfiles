@@ -219,12 +219,6 @@ fi
 
 # General UI/UX                                                               #
 if [ $force -eq 0 ] || ask "Would you like to configure General UI/UX" ; then
-  # Set computer name (as done via System Preferences → Sharing)
-  #sudo scutil --set ComputerName "0x6D746873"
-  #sudo scutil --set HostName "0x6D746873"
-  #sudo scutil --set LocalHostName "0x6D746873"
-  #sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
-
   # Disable the sound effects on boot
   sudo nvram SystemAudioVolume=" "
   # Set sidebar icon size to medium
@@ -315,9 +309,9 @@ if [ $force -eq 0 ] || ask "Would you like to configure Finder" ; then
   # Expand the following File Info panes:
   # “General”, “Open with”, and “Sharing & Permissions”
   defaults write com.apple.finder FXInfoPanesExpanded -dict \
-  	General -bool true \
-  	OpenWith -bool true \
-  	Privileges -bool true
+  General -bool true \
+  OpenWith -bool true \
+  Privileges -bool true
   print_success "Finder configured\\n"
 fi
 
@@ -352,7 +346,6 @@ fi
 
 # Photos                                                                      #
 if [ $force -eq 0 ] || ask "Would you like to prevent Photos from opening automatically when devices are plugged in" ; then
-  # Prevent Photos from opening automatically when devices are plugged in
   defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
   print_success "Photos configured\\n"
 fi
