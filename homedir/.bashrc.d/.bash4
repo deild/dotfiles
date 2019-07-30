@@ -4,44 +4,36 @@
 # nocaseglob
 #         If  set,  bash  matches filenames in a case-insensitive fashion when
 #         performing pathname expansion (see Pathname Expansion above).
-shopt -s nocaseglob;
+shopt -s nocaseglob
 
 # histappend
 #         If set, the history list is appended to the file named by the  value
 #         of the HISTFILE variable when the shell exits, rather than overwrit-
 #         ing the file.
-shopt -s histappend;
+shopt -s histappend
 
 # cdspell If  set,  minor errors in the spelling of a directory component in a
 #         cd command will be corrected.  The errors checked for are transposed
 #         characters,  a  missing character, and one character too many.  If a
 #         correction is found, the corrected file name  is  printed,  and  the
 #         command proceeds.  This option is only used by interactive shells.
-shopt -s cdspell;
+shopt -s cdspell
 
 # Enable some Bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
 # * Recursive globbing, e.g. `echo **/*.txt`
 for option in autocd globstar; do
-	shopt -s "$option" 2> /dev/null;
-done;
+	shopt -s "$option" 2>/dev/null
+done
 
 # Add tab completion for many Bash commands with Homebrew
-if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-  # shellcheck source=/dev/null
-	. "$(brew --prefix)/share/bash-completion/bash_completion";
+if command -v brew &>/dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+	# shellcheck source=/dev/null
+	. "$(brew --prefix)/share/bash-completion/bash_completion"
 elif [ -f /etc/bash_completion ]; then
-  # shellcheck source=/dev/null
-	. /etc/bash_completion;
-fi;
-
-#if which brew &> /dev/null && [ -z "$BASH_COMPLETION" ]; then
-#  BASH_COMPLETION="$(brew --prefix)/share/bash-completion/bash_completion"
-#  export BASH_COMPLETION
-#fi
-#if which brew &> /dev/null && [ -z "$BASH_COMPLETION_COMPLETIONSDIR" ]; then
-#  export BASH_COMPLETION_COMPLETIONSDIR=/usr/local/etc/bash_completion.d
-#fi
+	# shellcheck source=/dev/null
+	. /etc/bash_completion
+fi
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
